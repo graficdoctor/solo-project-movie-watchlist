@@ -15,6 +15,15 @@ searchButton.addEventListener('click', (e) => {
 		.then((response) => response.json())
 		.then((data) => {
 			let matchedMovies = data.Search;
+
+			if (matchedMovies.length === 0) {
+				populatedState.style.display = 'none';
+				noDataState.style.display = 'flex';
+			} else {
+				initialState.style.display = 'none';
+				populatedState.style.display = 'block';
+			}
+
 			matchedMovies.forEach((matchedMovie) => {
 				fetch(
 					`http://www.omdbapi.com/?apikey=${apiKey}&i=${matchedMovie.imdbID}`
