@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Movie Watchlist</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="style.css" />
+		<script src="app.js" defer></script>
+	</head>
+	<body>
+		<div class="wrapper">
+			<header>
+				<h1>Find your film</h1>
+				<a href="watchlist.html" class="btn">My watchlist</a>
+			</header>
+			<div class="form-control">
+				<form action="">
+					<div class="input-wrapper">
+						<!-- <label for="search-movie"></label> -->
+						<button class="btn icon-btn">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="icon icon-tabler icon-tabler-search"
+								width="44"
+								height="44"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								stroke="#2c3e50"
+								fill="none"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							>
+								<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+								<path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+								<path d="M21 21l-6 -6" />
+							</svg>
+						</button>
+						<input
+							type="text"
+							id="search-movie"
+							placeholder="Search for a movie"
+						/>
+					</div>
+					<button class="btn search-btn" type="submit">Search</button>
+				</form>
+			</div>
+			<main>
+				<!-- show on load website -->
+				<section class="initial-state">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="icon icon-tabler icon-tabler-movie"
+						width="44"
+						height="44"
+						viewBox="0 0 24 24"
+						stroke-width="1.5"
+						stroke="#2c3e50"
+						fill="none"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					>
+						<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+						<path
+							d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"
+						/>
+						<path d="M8 4l0 16" />
+						<path d="M16 4l0 16" />
+						<path d="M4 8l4 0" />
+						<path d="M4 16l4 0" />
+						<path d="M4 12l16 0" />
+						<path d="M16 8l4 0" />
+						<path d="M16 16l4 0" />
+					</svg>
+					<p>Start exploring</p>
+				</section>
+
+				<!-- show when movie searched -->
+				<section class="populated-state">
+					<ul class="populated-list" id="populated-list">
+						<!-- <li class="movie-item">
+							<img
+								src="images/bladerunner_poster.jpg"
+								alt="Poster Blade Runner"
+								class="img"
+							/>
+							<div class="movie-details">
+								<div class="movie-details__title">
+									<h4 class="movie-title">Blade Runner</h4>
+									<p class="movie-score">
+										<span>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												class="icon icon-tabler icon-tabler-star"
+												width="44"
+												height="44"
+												viewBox="0 0 24 24"
+												stroke-width="1.5"
+												stroke="#2c3e50"
+												fill="none"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											>
+												<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+												<path
+													d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"
+												/>
+											</svg>
+										</span>
+										8.1
+									</p>
+								</div>
+								<div class="movie-details__additional">
+									<span class="movie-duration">117min.</span>
+									<span class="movie-genre">Action, Drama, Sci-fi</span>
+									<button class="btn add-to-watchlist">
+										<span>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												class="icon icon-tabler icon-tabler-circle-plus"
+												width="44"
+												height="44"
+												viewBox="0 0 24 24"
+												stroke-width="1.5"
+												stroke="#2c3e50"
+												fill="none"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											>
+												<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+												<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
+												<path d="M9 12h6" />
+												<path d="M12 9v6" />
+											</svg>
+										</span>
+										Watchlist
+									</button>
+								</div>
+								<p class="movie-details__summary">
+									A blade runner must pursue and terminate four replicants who
+									stole a ship in space, and have returned to Earth to find
+									their creator.
+								</p>
+							</div>
+						</li>
+						<li class="movie-item">
+							<img
+								src="images/bladerunner_poster.jpg"
+								alt="Poster Blade Runner"
+								class="img"
+							/>
+							<div class="movie-details">
+								<div class="movie-details__title">
+									<h4 class="movie-title">Blade Runner</h4>
+									<p class="movie-score">
+										<span>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												class="icon icon-tabler icon-tabler-star"
+												width="44"
+												height="44"
+												viewBox="0 0 24 24"
+												stroke-width="1.5"
+												stroke="#2c3e50"
+												fill="none"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											>
+												<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+												<path
+													d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"
+												/>
+											</svg>
+										</span>
+										8.1
+									</p>
+								</div>
+								<div class="movie-details__additional">
+									<span class="movie-duration">117min.</span>
+									<span class="movie-genre">Action, Drama, Sci-fi</span>
+									<button class="btn add-to-watchlist">
+										<span>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												class="icon icon-tabler icon-tabler-circle-plus"
+												width="44"
+												height="44"
+												viewBox="0 0 24 24"
+												stroke-width="1.5"
+												stroke="#2c3e50"
+												fill="none"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											>
+												<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+												<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
+												<path d="M9 12h6" />
+												<path d="M12 9v6" />
+											</svg>
+										</span>
+										Watchlist
+									</button>
+								</div>
+								<p class="movie-details__summary"> A blade runner must pursue and terminate four replicants who stole a ship in space, and have returned to Earth to find their creator.
+								</p>
+							</div>
+						</li> -->
+					</ul>
+				</section>
+
+				<section class="no-data-state">
+					<p>
+						Unable to find what you’re looking for. Please try another search.
+					</p>
+				</section>
+			</main>
+		</div>
+	</body>
+</html>
