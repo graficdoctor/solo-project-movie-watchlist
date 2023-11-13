@@ -6,33 +6,50 @@ const apiKey = `9cee424d`;
 let searchInput = document.getElementById('search-movie');
 let searchButton = document.getElementById('search-button');
 
+updateDisplayState('initialState');
+
 searchButton.addEventListener('click', (e) => {
 	e.preventDefault();
 	let inputValue = searchInput.value;
-	let searchUrl = `http://www.omdbapi.com/?apikey=${apiKey}&s=${inputValue}&type=movie`;
 
-	fetch(searchUrl)
-		.then((response) => response.json())
-		.then((data) => {
-			let matchedMovies = data.Search;
+	if (!inputValue) {
+		updateDisplayState('noDataState');
+	} else {
+		updateDisplayState('populatedState');
+		fetch(`http://www.omdbapi.com/?apikey=${apiKey}&s=${inputValue}&type=movie`)
+			.then((response) => response.json())
+			.then((data) => {
+				let matchedMovies = data.Search;
 
-			if (matchedMovies.length === 0) {
-				populatedState.style.display = 'none';
-				noDataState.style.display = 'flex';
-			} else {
-				initialState.style.display = 'none';
-				populatedState.style.display = 'block';
-			}
+				matchedMovies.forEach((matchedMovie) => {
+					fetch(
+						`http://www.omdbapi.com/?apikey=${apiKey}&i=${matchedMovie.imdbID}`
+					)
+						.then((response) => response.json())
+						.then((movie) => {
+							let movieItem = document.createElement('li');
+							movieItem.classList.add('movie-item');
+							movieItem.innerHTML = createMovieItemInnerHTML(movie);
+							populatedList.append(movieItem);
+							truncateTextTo145Characters();
+						});
+				});
+				searchInput.value = '';
+			});
+	}
+});
 
-			matchedMovies.forEach((matchedMovie) => {
-				fetch(
-					`http://www.omdbapi.com/?apikey=${apiKey}&i=${matchedMovie.imdbID}`
-				)
-					.then((response) => response.json())
-					.then((movie) => {
-						let movieItem = document.createElement('li');
-						movieItem.classList.add('movie-item');
-						let movieItemInnerHTML = `
+function truncateTextTo145Characters() {
+	const movieSummary = document.querySelectorAll('.movie-details__summary');
+	movieSummary.forEach((summary) => {
+		if (summary.textContent.length > 145) {
+			summary.textContent = summary.textContent.substring(0, 145) + '...';
+		}
+	});
+}
+
+function createMovieItemInnerHTML(movie) {
+	let movieItemInnerHTML = `
             <img
             src="${movie.Poster}"
             alt="${movie.Title}"
@@ -93,23 +110,27 @@ searchButton.addEventListener('click', (e) => {
                     <p class="movie-details__summary">${movie.Plot}</p>
                     </div>						
                     `;
+	return movieItemInnerHTML;
+}
 
-						movieItem.innerHTML = movieItemInnerHTML;
-						populatedList.append(movieItem);
+function updateDisplayState(displayState) {
+	// Hide all states initially
+	initialState.style.display = 'none';
+	noDataState.style.display = 'none';
+	populatedState.style.display = 'none';
 
-						truncateTextTo145Characters();
-					});
-				return populatedList;
-			});
-			searchInput.value = '';
-		});
-});
-
-function truncateTextTo145Characters() {
-	const movieSummary = document.querySelectorAll('.movie-details__summary');
-	movieSummary.forEach((summary) => {
-		if (summary.textContent.length > 145) {
-			summary.textContent = summary.textContent.substring(0, 145) + '...';
-		}
-	});
+	// Show the desired state
+	switch (displayState) {
+		case 'initialState':
+			initialState.style.display = 'flex';
+			break;
+		case 'noDataState':
+			noDataState.style.display = 'flex';
+			break;
+		case 'populatedState':
+			populatedState.style.display = 'block';
+			break;
+		default:
+			console.error('Invalid display state:', displayState);
+	}
 }
