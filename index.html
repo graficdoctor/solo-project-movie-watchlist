@@ -4,6 +4,13 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Movie Watchlist</title>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+			integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -11,7 +18,7 @@
 			rel="stylesheet"
 		/>
 		<link rel="stylesheet" href="style.css" />
-		<script src="app.js" defer></script>
+		<script src="./script/app.js" type="module"></script>
 	</head>
 	<body>
 		<div class="wrapper">
@@ -55,30 +62,7 @@
 			<main>
 				<!-- show on load website -->
 				<section class="initial-state">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						class="icon icon-tabler icon-tabler-movie"
-						width="44"
-						height="44"
-						viewBox="0 0 24 24"
-						stroke-width="1.5"
-						stroke="#2c3e50"
-						fill="none"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-					>
-						<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-						<path
-							d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"
-						/>
-						<path d="M8 4l0 16" />
-						<path d="M16 4l0 16" />
-						<path d="M4 8l4 0" />
-						<path d="M4 16l4 0" />
-						<path d="M4 12l16 0" />
-						<path d="M16 8l4 0" />
-						<path d="M16 16l4 0" />
-					</svg>
+					<i class="fa-solid fa-film"></i>
 					<p>Start exploring</p>
 				</section>
 

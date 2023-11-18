@@ -4,6 +4,13 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Movie Watchlist</title>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+			integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -11,7 +18,7 @@
 			rel="stylesheet"
 		/>
 		<link rel="stylesheet" href="style.css" />
-		<script src="app.js" defer></script>
+		<script src="./script/watchlist.js" type="module"></script>
 	</head>
 	<body>
 		<div class="wrapper">
@@ -20,34 +27,16 @@
 				<a href="index.html" class="btn">Search for movies</a>
 			</header>
 			<main>
-				<!-- show on load website -->
-				<section class="initial-state">
+				<!-- show on empty -->
+				<section class="initial-state no-data-state">
 					<p>Your watchlist is looking a little empty...</p>
 					<a href="index.html" class="btn flex-item">
-						<span>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								class="icon icon-tabler icon-tabler-circle-plus"
-								width="44"
-								height="44"
-								viewBox="0 0 24 24"
-								stroke-width="1.5"
-								stroke="#2c3e50"
-								fill="none"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							>
-								<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-								<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
-								<path d="M9 12h6" />
-								<path d="M12 9v6" />
-							</svg>
-						</span>
+						<i class="fa-solid fa-circle-plus"></i>
 						Let’s add some movies!
 					</a>
 				</section>
 
-				<!-- show when movie searched -->
+				<!-- show on loaded -->
 				<section class="populated-state">
 					<ul class="populated-list" id="populated-list"></ul>
 				</section>
