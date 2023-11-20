@@ -1,8 +1,5 @@
-export { updateDisplayState, createMovieItem };
+import { updateDisplayState } from './index.js';
 
-const initialState = document.querySelector('.initial-state');
-const populatedState = document.querySelector('.populated-state');
-const noDataState = document.querySelector('.no-data-state');
 const populatedList = document.getElementById('populated-list');
 const apiKey = `9cee424d`;
 let searchInput = document.getElementById('search-movie');
@@ -12,6 +9,7 @@ updateDisplayState('initialState');
 
 searchButton.addEventListener('click', (e) => {
 	e.preventDefault();
+	populatedList.textContent = '';
 	let inputValue = searchInput.value;
 
 	if (!inputValue) {
@@ -86,7 +84,9 @@ function createMovieItem(movie, circleIconClass = 'fa-circle-plus') {
 	movieGenre.textContent = movie.Genre;
 
 	const addToWatchlistBtn = document.createElement('button');
-	addToWatchlistBtn.classList.add('btn', 'add-to-watchlist');
+	addToWatchlistBtn.classList.add('btn', 'watchlist');
+	addToWatchlistBtn.setAttribute('data-add', '');
+	addToWatchlistBtn.setAttribute('title', 'Add to Watchlist');
 
 	const circleIcon = document.createElement('i');
 	circleIcon.classList.add('fa-solid', circleIconClass);
@@ -103,30 +103,21 @@ function createMovieItem(movie, circleIconClass = 'fa-circle-plus') {
 	movieDetails.append(movieDetailsTitle, movieDetailsAdd, movieDetailsSummary);
 	movieItem.append(movieImage, movieDetails);
 	populatedList.appendChild(movieItem);
+
+	addToWatchlistBtn.addEventListener('click', () => addToWatchlist(movie));
 }
 
-function updateDisplayState(displayState) {
-	// Hide all states initially
-	initialState.style.display = 'none';
-	noDataState.style.display = 'none';
-	populatedState.style.display = 'none';
+function addToWatchlist(movie) {
+	let storedWatchList = localStorage.getItem('movieWatchList');
+	let movieWatchList = storedWatchList ? JSON.parse(storedWatchList) : [];
 
-	// Show the desired state
-	switch (displayState) {
-		case 'initialState':
-			initialState.style.display = 'flex';
-			break;
-		case 'noDataState':
-			noDataState.style.display = 'flex';
-			break;
-		case 'populatedState':
-			populatedState.style.display = 'block';
-			break;
-		default:
-			console.error('Invalid display state:', displayState);
+	const isMovieInWatchList = movieWatchList.some(
+		(item) => item.imdbID === movie.imdbID
+	);
+
+	if (!isMovieInWatchList) {
+		movieWatchList.push(movie);
 	}
-}
 
-// function loadMoviesWatchList() {
-// 	updateDisplayState('initialState');
-// }
+	localStorage.setItem('movieWatchList', JSON.stringify(movieWatchList));
+}

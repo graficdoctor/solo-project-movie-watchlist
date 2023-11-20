@@ -1,25 +1,31 @@
-import { updateDisplayState } from './index.js';
-
+const initialState = document.querySelector('.initial-state');
+const populatedState = document.querySelector('.populated-state');
+const noDataState = document.querySelector('.no-data-state');
 const populatedList = document.getElementById('populated-list');
-let movieWatchList = [];
 
-window.addEventListener('DOMContentLoaded', loadWatchlist);
+function updateDisplayState(displayState) {
+	// Hide all states initially
+	initialState.style.display = 'none';
+	noDataState.style.display = 'none';
+	populatedState.style.display = 'none';
 
-function loadWatchlist() {
-	populatedList.textContent = '';
-
-	let storedWatchList = localStorage.getItem('movieWatchList');
-	movieWatchList = storedWatchList ? JSON.parse(storedWatchList) : [];
-
-	if (movieWatchList.length === 0) {
-		updateDisplayState('initialState');
-	} else {
-		updateDisplayState('populatedState');
-		movieWatchList.map((item) => createMovieItem(item));
+	// Show the desired state
+	switch (displayState) {
+		case 'initialState':
+			initialState.style.display = 'flex';
+			break;
+		case 'noDataState':
+			noDataState.style.display = 'flex';
+			break;
+		case 'populatedState':
+			populatedState.style.display = 'block';
+			break;
+		default:
+			console.error('Invalid display state:', displayState);
 	}
 }
 
-function createMovieItem(movie) {
+function createMovieItem(movie, circleIconClass = 'fa-circle-plus') {
 	const movieItem = document.createElement('li');
 	movieItem.classList.add('movie-item');
 
@@ -58,7 +64,6 @@ function createMovieItem(movie) {
 
 	const removeFromWatchListBtn = document.createElement('button');
 	removeFromWatchListBtn.classList.add('btn', 'watchlist');
-	removeFromWatchListBtn.setAttribute('data-remove', '');
 	removeFromWatchListBtn.setAttribute('type', 'button');
 	removeFromWatchListBtn.setAttribute('title', 'Delete from Watchlist');
 
@@ -83,13 +88,4 @@ function createMovieItem(movie) {
 	);
 }
 
-function removeFromWatchlist(movie) {
-	movieWatchList.forEach((item, i) => {
-		if (item.imdbID === movie.imdbID) {
-			movieWatchList.splice(i, 1);
-		}
-	});
-
-	localStorage.setItem('movieWatchList', JSON.stringify(movieWatchList));
-	loadWatchlist();
-}
+export { updateDisplayState, createMovieItem };

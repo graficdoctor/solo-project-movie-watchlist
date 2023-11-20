@@ -309,7 +309,7 @@ p + a.btn {
 	cursor: pointer;
 }
 
-.btn.add-to-watchlist {
+.btn.watchlist {
 	background-color: transparent;
 	border: transparent;
 	display: flex;
@@ -317,9 +317,21 @@ p + a.btn {
 	padding: unset;
 	color: var(--clr-neutral-900);
 	gap: 0.25rem;
+	transition: all ease-out 0.3s;
 }
 
-.fa-circle-plus {
+.fa-circle-plus,
+.fa-circle-minus {
 	font-size: 1.25rem;
 	color: var(--clr-neutral-900);
+}
+
+.btn[data-add]:hover,
+.btn[data-add]:hover .fa-circle-plus {
+	color: green;
+}
+
+.btn[data-remove]:hover,
+.btn[data-remove]:hover .fa-circle-minus {
+	color: red;
 }
