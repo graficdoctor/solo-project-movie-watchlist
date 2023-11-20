@@ -17,14 +17,16 @@ searchButton.addEventListener('click', (e) => {
 		return;
 	} else {
 		updateDisplayState('populatedState');
-		fetch(`http://www.omdbapi.com/?apikey=${apiKey}&s=${inputValue}&type=movie`)
+		fetch(
+			`https://www.omdbapi.com/?apikey=${apiKey}&s=${inputValue}&type=movie`
+		)
 			.then((response) => response.json())
 			.then((data) => {
 				let matchedMovies = data.Search;
 
 				for (let matchedMovie of matchedMovies) {
 					fetch(
-						`http://www.omdbapi.com/?apikey=${apiKey}&i=${matchedMovie.imdbID}`
+						`https://www.omdbapi.com/?apikey=${apiKey}&i=${matchedMovie.imdbID}`
 					)
 						.then((response) => response.json())
 						.then((movie) => {
